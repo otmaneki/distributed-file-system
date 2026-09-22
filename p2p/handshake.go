@@ -11,5 +11,5 @@ type HandShakeFunc func(Peer) error
 
 // NoOpHandshake is a dummy handshake that does nothing, use it in case you don't want to do handshakes.
 func NoOpHandshake(Peer) error {
-    return nil
+	return nil
 }

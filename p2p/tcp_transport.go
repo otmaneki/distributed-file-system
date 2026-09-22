@@ -96,14 +96,14 @@ func (t *TCPTransport) Dial(addr string) error {
 // Send implements the Peer interface
 // and it will send a slice of bytes over the network.
 func (p *TCPPeer) Send(data []byte) error {
-	_, err := p.Conn.Write(data)
+	_, err := p.Write(data)
 	return err
 }
 
 // CloseStream will set the internal waitgroup as done
 // and implements the Peer interface.
 func (p *TCPPeer) CloseStream() {
-    p.wg.Done()
+	p.wg.Done()
 }
 
 func (t *TCPTransport) acceptLoop() {
@@ -159,7 +159,7 @@ func (t *TCPTransport) handleConn(conn net.Conn, isOutbound bool) {
 			continue
 		}
 
-		rpc.From = peer.Conn.RemoteAddr()
+		rpc.From = peer.RemoteAddr()
 		if rpc.Stream {
 			peer.wg.Add(1)
 			log.Printf("[%s] incoming is a stream, waiting...\n", conn.RemoteAddr())
